@@ -3,15 +3,18 @@
 ## Team Introduction
 Hello
 
-- Lecturer
-    - `Scott Uk-Jin Lee`
-- Teaching Assistants
-    - `Joonwoo Lee`
-    - `Jeongbin Park`
+- Team leader
+    - 장선우
+- team
+    - 이명진
+    - 김윤진
+    - Binderiya
+    - enkhjin
+    - Ilham Ibnu
 
 ## Team Requirements
 
-### - Instruct
+### - 2Player Mode
 
 
 ## Detailed Requirements
