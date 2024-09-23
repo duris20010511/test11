@@ -11,8 +11,7 @@ Hello
     - Assisant programmer
     - 이명진
     - 김윤진
-    - Binderiya
-    - enkhjin
+   
     
 
 ## Team Requirements
