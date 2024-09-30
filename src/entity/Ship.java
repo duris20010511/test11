@@ -23,9 +23,9 @@ public class Ship extends Entity {
 	private static final int SPEED = 2;
 	
 	/** Minimum time between shots. */
-	private Cooldown shootingCooldown;
+	private final Cooldown shootingCooldown;
 	/** Time spent inactive between hits. */
-	private Cooldown destructionCooldown;
+	private final Cooldown destructionCooldown;
 
 	/**
 	 * Constructor, establishes the ship's properties.

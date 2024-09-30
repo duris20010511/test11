@@ -9,15 +9,15 @@ package engine;
 public class GameState {
 
 	/** Current game level. */
-	private int level;
+	private final int level;
 	/** Current score. */
-	private int score;
+	private final int score;
 	/** Lives currently remaining. */
-	private int livesRemaining;
+	private final int livesRemaining;
 	/** Bullets shot until now. */
-	private int bulletsShot;
+	private final int bulletsShot;
 	/** Ships destroyed until now. */
-	private int shipsDestroyed;
+	private final int shipsDestroyed;
 
 	/**
 	 * Constructor.

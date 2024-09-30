@@ -9,13 +9,13 @@ package engine;
 public class GameSettings {
 
 	/** Width of the level's enemy formation. */
-	private int formationWidth;
+	private final int formationWidth;
 	/** Height of the level's enemy formation. */
-	private int formationHeight;
+	private final int formationHeight;
 	/** Speed of the enemies, function of the remaining number. */
-	private int baseSpeed;
+	private final int baseSpeed;
 	/** Frequency of enemy shootings, +/- 30%. */
-	private int shootingFrecuency;
+	private final int shootingFrecuency;
 
 	/**
 	 * Constructor.

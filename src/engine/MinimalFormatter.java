@@ -23,13 +23,13 @@ public class MinimalFormatter extends Formatter {
 	@Override
 	public final String format(final LogRecord logRecord) {
 
-		StringBuilder output = new StringBuilder().append("[")
-				.append(logRecord.getLevel()).append('|')
-				.append(FORMAT.format(new Date(logRecord.getMillis())))
-				.append("]: ").append(logRecord.getMessage()).append(' ')
-				.append(LINE_SEPARATOR);
+        String output = "[" +
+                logRecord.getLevel() + '|' +
+                FORMAT.format(new Date(logRecord.getMillis())) +
+                "]: " + logRecord.getMessage() + ' ' +
+                LINE_SEPARATOR;
 
-		return output.toString();
+		return output;
 	}
 
 }

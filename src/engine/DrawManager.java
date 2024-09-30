@@ -51,7 +51,7 @@ public final class DrawManager {
 	private static Map<SpriteType, boolean[][]> spriteMap;
 
 	/** Sprite types. */
-	public static enum SpriteType {
+	public enum SpriteType {
 		/** Player ship. */
 		Ship,
 		/** Destroyed player ship. */
@@ -76,9 +76,9 @@ public final class DrawManager {
 		EnemyShipSpecial,
 		/** Destroyed enemy ship. */
 		Explosion
-	};
+	}
 
-	/**
+    /**
 	 * Private constructor.
 	 */
 	private DrawManager() {
@@ -122,7 +122,7 @@ public final class DrawManager {
 	 * 
 	 * @return Shared instance of DrawManager.
 	 */
-	protected static DrawManager getInstance() {
+	static DrawManager getInstance() {
 		if (instance == null)
 			instance = new DrawManager();
 		return instance;
@@ -243,6 +243,22 @@ public final class DrawManager {
 		backBufferGraphics.drawString(scoreString, screen.getWidth() - 60, 25);
 	}
 
+	public void drawScore(final Screen screen, final int score, final int player) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.WHITE);
+		String scoreString = String.format("%04d", score);
+
+		// Adjust position based on player number
+		if (player == 1) {
+			// Draw Player 1's score on the left side
+			backBufferGraphics.drawString(scoreString, 20, 25);  // Adjust coordinates as necessary
+		} else if (player == 2) {
+			// Draw Player 2's score on the right side
+			backBufferGraphics.drawString(scoreString, screen.getWidth() - 100, 25);  // Adjust coordinates as necessary
+		}
+	}
+
+
 	/**
 	 * Draws number of remaining lives on screen.
 	 * 
@@ -259,6 +275,29 @@ public final class DrawManager {
 		for (int i = 0; i < lives; i++)
 			drawEntity(dummyShip, 40 + 35 * i, 10);
 	}
+
+	public void drawLives(final Screen screen, final int lives, final int player) {
+		backBufferGraphics.setFont(fontRegular);
+		backBufferGraphics.setColor(Color.WHITE);
+
+		// Adjust position based on player number
+		if (player == 1) {
+			// Draw Player 1's lives on the left side
+			backBufferGraphics.drawString(Integer.toString(lives), 20, 50);  // Adjust y-coordinate for better spacing
+			Ship dummyShip = new Ship(0, 0);  // Dummy ship for drawing lives
+			for (int i = 0; i < lives; i++) {
+				drawEntity(dummyShip, 40 + 35 * i, 35);  // Adjust x, y coordinates as necessary
+			}
+		} else if (player == 2) {
+			// Draw Player 2's lives on the right side
+			backBufferGraphics.drawString(Integer.toString(lives), screen.getWidth() - 100, 50);  // Adjust x, y coordinates
+			Ship dummyShip = new Ship(0, 0);  // Dummy ship for drawing lives
+			for (int i = 0; i < lives; i++) {
+				drawEntity(dummyShip, screen.getWidth() - 80 - 35 * i, 35);  // Adjust x, y coordinates for Player 2
+			}
+		}
+	}
+
 
 	/**
 	 * Draws a thick line from side to side of the screen.
@@ -283,16 +322,19 @@ public final class DrawManager {
 	 */
 	public void drawTitle(final Screen screen) {
 		String titleString = "Invaders";
-		String instructionsString =
-				"select with w+s / arrows, confirm with space";
+		String instructionsLine1 = "Select with W/S or Arrows,";
+		String instructionsLine2 = "Confirm with Enter";
 
+		// Draw instructions
 		backBufferGraphics.setColor(Color.GRAY);
-		drawCenteredRegularString(screen, instructionsString,
-				screen.getHeight() / 2);
+		drawCenteredRegularString(screen, instructionsLine1, screen.getHeight() / 2);
+		drawCenteredRegularString(screen, instructionsLine2, screen.getHeight() / 2 + fontRegularMetrics.getHeight());
 
+		// Draw title
 		backBufferGraphics.setColor(Color.GREEN);
 		drawCenteredBigString(screen, titleString, screen.getHeight() / 3);
 	}
+
 
 	/**
 	 * Draws main menu.
@@ -304,27 +346,35 @@ public final class DrawManager {
 	 */
 	public void drawMenu(final Screen screen, final int option) {
 		String playString = "Play";
+		String playMultiplayerString = "Play 2-player Mode";
 		String highScoresString = "High scores";
-		String exitString = "exit";
+		String exitString = "Exit";
+		int baseY = screen.getHeight() / 3 * 2;
+		int spacing = fontRegularMetrics.getHeight() * 2;
 
 		if (option == 2)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, playString,
-				screen.getHeight() / 3 * 2);
+		drawCenteredRegularString(screen, playString, baseY);
+
 		if (option == 3)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, highScoresString, screen.getHeight()
-				/ 3 * 2 + fontRegularMetrics.getHeight() * 2);
+		drawCenteredRegularString(screen, playMultiplayerString, baseY + spacing);
+
+		if (option == 4)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, highScoresString, baseY + spacing * 2);
+
 		if (option == 0)
 			backBufferGraphics.setColor(Color.GREEN);
 		else
 			backBufferGraphics.setColor(Color.WHITE);
-		drawCenteredRegularString(screen, exitString, screen.getHeight() / 3
-				* 2 + fontRegularMetrics.getHeight() * 4);
+		drawCenteredRegularString(screen, exitString, baseY + spacing * 3);
 	}
 
 	/**

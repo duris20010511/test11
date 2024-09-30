@@ -50,26 +50,26 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	private static final int MINIMUM_SPEED = 10;
 
 	/** DrawManager instance. */
-	private DrawManager drawManager;
+	private final DrawManager drawManager;
 	/** Application logger. */
-	private Logger logger;
+	private final Logger logger;
 	/** Screen to draw ships on. */
 	private Screen screen;
 
 	/** List of enemy ships forming the formation. */
-	private List<List<EnemyShip>> enemyShips;
+	private final List<List<EnemyShip>> enemyShips;
 	/** Minimum time between shots. */
 	private Cooldown shootingCooldown;
 	/** Number of ships in the formation - horizontally. */
-	private int nShipsWide;
+	private final int nShipsWide;
 	/** Number of ships in the formation - vertically. */
-	private int nShipsHigh;
+	private final int nShipsHigh;
 	/** Time between shots. */
-	private int shootingInterval;
+	private final int shootingInterval;
 	/** Variance in the time between shots. */
-	private int shootingVariance;
+	private final int shootingVariance;
 	/** Initial ship speed. */
-	private int baseSpeed;
+	private final int baseSpeed;
 	/** Speed of the ships. */
 	private int movementSpeed;
 	/** Current direction the formation is moving on. */
@@ -87,11 +87,11 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 	/** Position in the y-axis of the upper left corner of the formation. */
 	private int positionY;
 	/** Width of one ship. */
-	private int shipWidth;
+	private final int shipWidth;
 	/** Height of one ship. */
-	private int shipHeight;
+	private final int shipHeight;
 	/** List of ships that are able to shoot. */
-	private List<EnemyShip> shooters;
+	private final List<EnemyShip> shooters;
 	/** Number of not destroyed ships. */
 	private int shipCount;
 
@@ -103,9 +103,9 @@ public class EnemyShipFormation implements Iterable<EnemyShip> {
 		LEFT,
 		/** Movement to the bottom of the screen. */
 		DOWN
-	};
+	}
 
-	/**
+    /**
 	 * Constructor, sets the initial conditions.
 	 * 
 	 * @param gameSettings

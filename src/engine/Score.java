@@ -9,9 +9,9 @@ package engine;
 public class Score implements Comparable<Score> {
 
 	/** Player's name. */
-	private String name;
+	private final String name;
 	/** Score points. */
-	private int score;
+	private final int score;
 
 	/**
 	 * Constructor.

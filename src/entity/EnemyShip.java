@@ -28,7 +28,7 @@ public class EnemyShip extends Entity {
 	/** Checks if the ship has been hit by a bullet. */
 	private boolean isDestroyed;
 	/** Values of the ship, in points, when destroyed. */
-	private int pointValue;
+	private final int pointValue;
 
 	/**
 	 * Constructor, establishes the ship's properties.

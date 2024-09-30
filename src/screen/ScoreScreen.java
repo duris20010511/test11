@@ -28,23 +28,23 @@ public class ScoreScreen extends Screen {
 	private static final int LAST_CHAR = 90;
 
 	/** Current score. */
-	private int score;
+	private final int score;
 	/** Player lives left. */
-	private int livesRemaining;
+	private final int livesRemaining;
 	/** Total bullets shot by the player. */
-	private int bulletsShot;
+	private final int bulletsShot;
 	/** Total ships destroyed by the player. */
-	private int shipsDestroyed;
+	private final int shipsDestroyed;
 	/** List of past high scores. */
 	private List<Score> highScores;
 	/** Checks if current score is a new high score. */
 	private boolean isNewRecord;
 	/** Player name for record input. */
-	private char[] name;
+	private final char[] name;
 	/** Character of players name selected for change. */
 	private int nameCharSelected;
 	/** Time between changes in user selection. */
-	private Cooldown selectionCooldown;
+	private final Cooldown selectionCooldown;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -109,7 +109,8 @@ public class ScoreScreen extends Screen {
 				this.isRunning = false;
 				if (this.isNewRecord)
 					saveScore();
-			} else if (inputManager.isKeyDown(KeyEvent.VK_SPACE)) {
+			} else if (inputManager.isKeyDown(KeyEvent.VK_SPACE) || inputManager
+					.isKeyDown(KeyEvent.VK_ENTER)) {
 				// Play again.
 				this.returnCode = 2;
 				this.isRunning = false;

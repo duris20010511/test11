@@ -17,7 +17,7 @@ public class TitleScreen extends Screen {
 	private static final int SELECTION_TIME = 200;
 	
 	/** Time between changes in user selection. */
-	private Cooldown selectionCooldown;
+	private final Cooldown selectionCooldown;
 
 	/**
 	 * Constructor, establishes the properties of the screen.
@@ -56,20 +56,16 @@ public class TitleScreen extends Screen {
 		super.update();
 
 		draw();
-		if (this.selectionCooldown.checkFinished()
-				&& this.inputDelay.checkFinished()) {
-			if (inputManager.isKeyDown(KeyEvent.VK_UP)
-					|| inputManager.isKeyDown(KeyEvent.VK_W)) {
+		if (selectionCooldown.checkFinished() && inputDelay.checkFinished()) {
+			if (inputManager.isKeyDown(KeyEvent.VK_UP) || inputManager.isKeyDown(KeyEvent.VK_W)) {
 				previousMenuItem();
-				this.selectionCooldown.reset();
-			}
-			if (inputManager.isKeyDown(KeyEvent.VK_DOWN)
-					|| inputManager.isKeyDown(KeyEvent.VK_S)) {
+				selectionCooldown.reset();
+			} else if (inputManager.isKeyDown(KeyEvent.VK_DOWN) || inputManager.isKeyDown(KeyEvent.VK_S)) {
 				nextMenuItem();
-				this.selectionCooldown.reset();
+				selectionCooldown.reset();
+			} else if (inputManager.isKeyDown(KeyEvent.VK_SPACE) || inputManager.isKeyDown(KeyEvent.VK_ENTER)) {
+				isRunning = false;
 			}
-			if (inputManager.isKeyDown(KeyEvent.VK_SPACE))
-				this.isRunning = false;
 		}
 	}
 
@@ -77,10 +73,8 @@ public class TitleScreen extends Screen {
 	 * Shifts the focus to the next menu item.
 	 */
 	private void nextMenuItem() {
-		if (this.returnCode == 3)
+		if (this.returnCode == 4)
 			this.returnCode = 0;
-		else if (this.returnCode == 0)
-			this.returnCode = 2;
 		else
 			this.returnCode++;
 	}
@@ -90,12 +84,11 @@ public class TitleScreen extends Screen {
 	 */
 	private void previousMenuItem() {
 		if (this.returnCode == 0)
-			this.returnCode = 3;
-		else if (this.returnCode == 2)
-			this.returnCode = 0;
+			this.returnCode = 4;
 		else
 			this.returnCode--;
 	}
+
 
 	/**
 	 * Draws the elements associated with the screen.

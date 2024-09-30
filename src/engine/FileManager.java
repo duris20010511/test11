@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +51,7 @@ public final class FileManager {
 	 * 
 	 * @return Shared instance of FileManager.
 	 */
-	protected static FileManager getInstance() {
+	static FileManager getInstance() {
 		if (instance == null)
 			instance = new FileManager();
 		return instance;
@@ -83,10 +84,7 @@ public final class FileManager {
 							c = (char) inputStream.read();
 						while (c != '0' && c != '1');
 
-						if (c == '1')
-							sprite.getValue()[i][j] = true;
-						else
-							sprite.getValue()[i][j] = false;
+                        sprite.getValue()[i][j] = c == '1';
 					}
 				logger.fine("Sprite " + sprite.getKey() + " loaded.");
 			}
@@ -181,7 +179,7 @@ public final class FileManager {
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
-			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+			jarPath = URLDecoder.decode(jarPath, StandardCharsets.UTF_8);
 
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
@@ -190,7 +188,7 @@ public final class FileManager {
 			File scoresFile = new File(scoresPath);
 			inputStream = new FileInputStream(scoresFile);
 			bufferedReader = new BufferedReader(new InputStreamReader(
-					inputStream, Charset.forName("UTF-8")));
+					inputStream, StandardCharsets.UTF_8));
 
 			logger.info("Loading user high scores.");
 
@@ -234,7 +232,7 @@ public final class FileManager {
 		try {
 			String jarPath = FileManager.class.getProtectionDomain()
 					.getCodeSource().getLocation().getPath();
-			jarPath = URLDecoder.decode(jarPath, "UTF-8");
+			jarPath = URLDecoder.decode(jarPath, StandardCharsets.UTF_8);
 
 			String scoresPath = new File(jarPath).getParent();
 			scoresPath += File.separator;
@@ -247,7 +245,7 @@ public final class FileManager {
 
 			outputStream = new FileOutputStream(scoresFile);
 			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
-					outputStream, Charset.forName("UTF-8")));
+					outputStream, StandardCharsets.UTF_8));
 
 			logger.info("Saving user high scores.");
 

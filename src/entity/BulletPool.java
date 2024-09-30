@@ -12,7 +12,7 @@ import java.util.Set;
 public final class BulletPool {
 
 	/** Set of already created bullets. */
-	private static Set<Bullet> pool = new HashSet<Bullet>();
+	private static final Set<Bullet> pool = new HashSet<Bullet>();
 
 	/**
 	 * Constructor, not called.
